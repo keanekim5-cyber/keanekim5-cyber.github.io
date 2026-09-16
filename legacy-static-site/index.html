@@ -1,0 +1,1067 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keane Kim — Maker, Engineer, Chemist</title>
+<meta name="description" content="Portfolio of Keane Kim: pneumatic hardware, microcontroller control systems, organic synthesis, and CAD / 3D-printed parts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<style>
+  /* ---------- tokens ---------- */
+  :root{
+    color-scheme: light;
+
+    --paper:      #ffffff;
+    --surface:    #f4f7f7;
+    --ink:        #11181a;
+    --ink-2:      #39464a;
+    --muted:      #69787c;
+    --rule:       #dfe6e6;
+    --rule-firm:  #bfcccd;
+    --accent:     #0f6b74;
+    --accent-deep:#0a4c53;
+    --accent-wash:#e7f1f1;
+
+    --display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --body: "Newsreader", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    --measure: 66ch;
+    --gutter: clamp(1.25rem, 5vw, 4rem);
+    --max: 76rem;
+
+    --label: 0.75rem;
+    --small: 0.9375rem;
+    --base: 1.0625rem;
+    --h3: clamp(1.25rem, 2.2vw, 1.5rem);
+    --h2: clamp(2rem, 4.6vw, 3rem);
+    --h1: clamp(2.6rem, 7.5vw, 4.75rem);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html{
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ transition-duration: 0.01ms !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: var(--base);
+    line-height: 1.65;
+    font-synthesis-weight: none;
+  }
+
+  ::selection{ background: var(--accent-wash); color: var(--accent-deep); }
+
+  a{ color: var(--accent); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+  a:hover{ color: var(--accent-deep); }
+  :focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .wrap{
+    width: 100%;
+    max-width: var(--max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .prose{ max-width: var(--measure); }
+  .prose p{ margin: 0 0 1.1em; color: var(--ink-2); }
+  .prose p:last-child{ margin-bottom: 0; }
+  .prose strong{ color: var(--ink); font-weight: 500; }
+
+  /* ---------- masthead / nav ---------- */
+  .masthead{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .masthead .wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 4rem;
+  }
+  .wordmark{
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .wordmark span{ color: var(--rule-firm); font-weight: 500; }
+
+  .nav{
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 3vw, 2rem);
+    font-family: var(--mono);
+    font-size: var(--label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nav a{
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid transparent;
+    transition: color 140ms ease, border-color 140ms ease;
+  }
+  .nav a:hover{ color: var(--ink); }
+  .nav a[aria-current="true"]{
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding-block: clamp(4.5rem, 13vw, 8.5rem) clamp(3.5rem, 9vw, 6rem);
+    text-align: center;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero .eyebrow{ justify-content: center; }
+
+  .hero h1{
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: var(--h1);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    margin: 0.75rem 0 0;
+    text-wrap: balance;
+  }
+  .tagline{
+    margin: 1.25rem auto 0;
+    max-width: 46ch;
+    font-size: clamp(1.0625rem, 1.9vw, 1.3125rem);
+    line-height: 1.55;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .tagline em{ color: var(--ink); font-style: italic; }
+
+  .disciplines{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 0.75rem;
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--mono);
+    font-size: var(--label);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .disciplines li{
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+    white-space: nowrap;
+  }
+
+  .hero-actions{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+  }
+  .btn{
+    font-family: var(--mono);
+    font-size: var(--label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.7rem 1.1rem;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+    transition: background-color 140ms ease, color 140ms ease;
+  }
+  .btn:hover{ background: var(--accent-wash); color: var(--accent-deep); }
+  .btn-solid{
+    background: var(--accent);
+    color: var(--paper);
+    border-color: var(--accent);
+  }
+  .btn-solid:hover{ background: var(--accent-deep); border-color: var(--accent-deep); color: var(--paper); }
+
+  /* ---------- section scaffolding ---------- */
+  .section{ padding-block: clamp(3.5rem, 8vw, 6rem); }
+  .section + .section{ border-top: 1px solid var(--rule); }
+  [id]{ scroll-margin-top: 5rem; }
+
+  .eyebrow{
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--mono);
+    font-size: var(--label);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+  .eyebrow::before{
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: var(--rule-firm);
+    flex: none;
+  }
+  .hero .eyebrow::after{
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: var(--rule-firm);
+    flex: none;
+  }
+
+  .section-head{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-bottom: clamp(2rem, 5vw, 3rem);
+  }
+  .section-head h2{
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: var(--h2);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin: 0.6rem 0 0;
+    text-wrap: balance;
+  }
+  .section-head .count{
+    font-family: var(--mono);
+    font-size: var(--label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- project ---------- */
+  .project{
+    display: grid;
+    grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+    gap: clamp(1.75rem, 4vw, 3.5rem);
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+  }
+  .project + .project{ border-top: 1px solid var(--rule); }
+  .project:first-of-type{ padding-top: 0; }
+
+  .titleblock{
+    align-self: start;
+    font-family: var(--mono);
+    font-size: var(--label);
+    line-height: 1.5;
+  }
+  @media (min-width: 60rem){
+    .titleblock{ position: sticky; top: 6rem; }
+  }
+  .titleblock dl{
+    margin: 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+  .titleblock dt{
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.6875rem;
+  }
+  .titleblock dd{
+    margin: 0.15rem 0 0;
+    color: var(--ink);
+  }
+  .fill{
+    color: var(--muted);
+    font-style: italic;
+    border-bottom: 1px dotted var(--rule-firm);
+  }
+
+  .project-body h3{
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: var(--h3);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0 0 1rem;
+    text-wrap: balance;
+  }
+  .project-body h3 .rule{
+    display: block;
+    width: 2.5rem;
+    height: 3px;
+    background: var(--accent);
+    margin-bottom: 0.9rem;
+  }
+  .project-body h4{
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: var(--label);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 2.25rem 0 0.9rem;
+  }
+
+  /* ---------- media placeholders ---------- */
+  .frames{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+    gap: 1rem;
+    margin: 0;
+  }
+  figure{ margin: 0; }
+  .frame{
+    aspect-ratio: 4 / 3;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 0.4rem;
+    padding: 1rem;
+    text-align: center;
+    border: 1px dashed var(--rule-firm);
+    background-color: var(--surface);
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent 0 11px,
+      rgba(15,107,116,0.045) 11px 12px
+    );
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: var(--label);
+  }
+  .frame.wide{ aspect-ratio: 16 / 9; }
+  .frame .kind{
+    color: var(--accent-deep);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.6875rem;
+  }
+  .frame .note{ max-width: 30ch; line-height: 1.45; }
+  figcaption{
+    margin-top: 0.55rem;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  /* ---------- code ---------- */
+  .code{
+    margin: 0;
+    padding: 1rem 1.1rem;
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: var(--ink-2);
+    tab-size: 2;
+  }
+  .code b{ color: var(--accent-deep); font-weight: 500; }
+  .code i{ color: var(--muted); font-style: normal; }
+
+  /* ---------- reaction scheme ---------- */
+  .scheme{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1.1rem;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    font-family: var(--mono);
+    font-size: var(--small);
+    overflow-x: auto;
+  }
+  .reagent{
+    border: 1px solid var(--rule-firm);
+    background: var(--surface);
+    padding: 0.4rem 0.65rem;
+    white-space: nowrap;
+    color: var(--ink);
+  }
+  .op{ color: var(--muted); }
+  .arrow{
+    display: grid;
+    justify-items: center;
+    gap: 0.15rem;
+    color: var(--accent-deep);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  .arrow .glyph{ font-size: 1.15rem; line-height: 1; color: var(--accent); }
+  .product{
+    border: 1px solid var(--accent);
+    background: var(--accent-wash);
+    color: var(--accent-deep);
+    padding: 0.4rem 0.65rem;
+    white-space: nowrap;
+  }
+
+  /* ---------- checks / lists ---------- */
+  .checks{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+    max-width: var(--measure);
+  }
+  .checks li{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    align-items: baseline;
+    color: var(--ink-2);
+    font-size: var(--small);
+  }
+  .checks li::before{
+    content: "—";
+    color: var(--accent);
+    font-family: var(--mono);
+  }
+
+  /* ---------- about ---------- */
+  .about{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .skills{
+    margin: 2rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1.1rem;
+    list-style: none;
+    max-width: var(--measure);
+  }
+  .skills dt, .skills .k{
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.2rem;
+  }
+  .skills .v{ color: var(--ink-2); font-size: var(--small); }
+
+  .contact{
+    border: 1px solid var(--rule);
+    padding: 1.5rem;
+    background: var(--surface);
+  }
+  .contact h3{
+    font-family: var(--mono);
+    font-size: var(--label);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 1rem;
+  }
+  .contact ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.85rem;
+  }
+  .contact a{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    font-family: var(--mono);
+    font-size: var(--small);
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.6rem;
+  }
+  .contact li:last-child a{ border-bottom: 0; padding-bottom: 0; }
+  .contact a:hover{ color: var(--accent-deep); }
+  .contact a .k{
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex: none;
+  }
+  .contact a:hover .k{ color: var(--accent); }
+
+  /* ---------- footer ---------- */
+  .colophon{
+    border-top: 1px solid var(--rule);
+    padding-block: 2rem 3rem;
+  }
+  .colophon .wrap{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- narrow screens ---------- */
+  @media (max-width: 60rem){
+    .project{ grid-template-columns: 1fr; gap: 1.75rem; }
+    .titleblock{
+      border-left: 2px solid var(--accent);
+      padding-left: 1rem;
+    }
+    .titleblock dl{
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+      gap: 1rem;
+    }
+    .about{ grid-template-columns: 1fr; }
+  }
+  @media (max-width: 34rem){
+    .masthead .wrap{
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+      padding-block: 0.6rem;
+    }
+    .nav{ gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="wordmark" href="#home">Keane Kim <span>/ portfolio</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#home">Home</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section id="home" class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Maker · Engineer · Chemist</p>
+      <h1>Keane Kim</h1>
+      <p class="tagline">
+        I build things from scratch — <em>mechanical hardware and electronics</em> on one bench,
+        <em>organic chemistry and 3D printing</em> on the next. Design it, machine or print it, wire it, run it.
+      </p>
+      <ul class="disciplines">
+        <li>Pneumatics &amp; mechanisms</li>
+        <li>Microcontrollers</li>
+        <li>Organic synthesis</li>
+        <li>CAD &amp; additive manufacturing</li>
+      </ul>
+      <div class="hero-actions">
+        <a class="btn btn-solid" href="#projects">See the projects</a>
+        <a class="btn" href="#about">About &amp; contact</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects" class="section">
+    <div class="wrap">
+
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Selected work</p>
+          <h2>Projects</h2>
+        </div>
+        <p class="count">Three builds · hardware, wet lab, additive</p>
+      </div>
+
+      <!-- ---- Project 1 ---- -->
+      <article class="project">
+        <aside class="titleblock">
+          <dl>
+            <div>
+              <dt>Discipline</dt>
+              <dd>Mechanical / pneumatic / embedded</dd>
+            </div>
+            <div>
+              <dt>Chassis</dt>
+              <dd>Welded steel frame, two-axis gimbal</dd>
+            </div>
+            <div>
+              <dt>Drive</dt>
+              <dd>Compressed air, solenoid-triggered valve</dd>
+            </div>
+            <div>
+              <dt>Control</dt>
+              <dd>ATmega328P (Arduino Nano)</dd>
+            </div>
+            <div>
+              <dt>Input</dt>
+              <dd>2 × 10 kΩ linear potentiometers</dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd><span class="fill">add current status</span></dd>
+            </div>
+          </dl>
+        </aside>
+
+        <div class="project-body">
+          <h3><span class="rule" aria-hidden="true"></span>Mechanical Potato Cannon</h3>
+
+          <div class="prose">
+            <p>
+              A pneumatic launcher built around a rigid chassis and a two-axis aiming gimbal, with
+              aiming coordinates set electronically rather than by eye. The frame carries the
+              pressure vessel and barrel on a bearing-mounted yoke, so azimuth and elevation move
+              independently without the barrel loading the joint.
+            </p>
+            <p>
+              The pneumatic side is deliberately simple and inspectable: a rated air reservoir, a
+              regulator and gauge on the fill line, a bleed valve, and a fast-acting valve between
+              reservoir and barrel. The valve is triggered by a solenoid rather than by hand, which
+              keeps the operator behind the frame and out of the barrel's plane during firing.
+            </p>
+            <p>
+              <strong>Aiming is closed through a microcontroller.</strong> Two 10 kΩ linear
+              potentiometers sit on a handheld panel — one for azimuth, one for elevation. Each wiper
+              feeds an analog input on the Nano, which reads the 0–1023 ADC value, applies a
+              calibration offset and a small deadband, and maps it to a target angle. The angles are
+              driven out to the gimbal servos and echoed to a small display so the coordinate pair is
+              readable before the shot. Firing is gated behind a separate arming switch, so a stray
+              knock on a pot moves the barrel but never releases the tank.
+            </p>
+          </div>
+
+          <h4>Aiming loop — core mapping</h4>
+          <pre class="code"><code><i>// Replace with the actual sketch — this is the shape of the mapping.</i>
+<b>const int</b> AZ_PIN = A0, EL_PIN = A1;
+<b>const int</b> AZ_MIN = 0,  AZ_MAX = 180;   <i>// degrees of travel</i>
+<b>const int</b> EL_MIN = 10, EL_MAX = 70;
+
+<b>int</b> readAxis(<b>int</b> pin, <b>int</b> lo, <b>int</b> hi) {
+  <b>int</b> raw = analogRead(pin);          <i>// 0 – 1023</i>
+  raw = constrain(raw, DEADBAND, 1023 - DEADBAND);
+  <b>return</b> map(raw, DEADBAND, 1023 - DEADBAND, lo, hi);
+}
+
+<b>void</b> loop() {
+  <b>int</b> az = readAxis(AZ_PIN, AZ_MIN, AZ_MAX);
+  <b>int</b> el = readAxis(EL_PIN, EL_MIN, EL_MAX);
+  azServo.write(az);
+  elServo.write(el);
+  showCoords(az, el);                   <i>// echo to display</i>
+}</code></pre>
+
+          <h4>Documentation</h4>
+          <div class="frames">
+            <figure>
+              <div class="frame">
+                <span class="kind">Photo</span>
+                <span class="note">Full chassis, side elevation — barrel, reservoir, gimbal</span>
+              </div>
+              <figcaption>IMAGE — replace with photo of the assembled launcher.</figcaption>
+            </figure>
+            <figure>
+              <div class="frame">
+                <span class="kind">Photo / diagram</span>
+                <span class="note">Control panel: pot wiring to the Nano, arming switch</span>
+              </div>
+              <figcaption>IMAGE — wiring detail or a hand-drawn schematic works well here.</figcaption>
+            </figure>
+          </div>
+          <figure style="margin-top:1rem">
+            <div class="frame wide">
+              <span class="kind">Video</span>
+              <span class="note">Demonstration: aiming sweep, then a downrange test fire</span>
+            </div>
+            <figcaption>VIDEO — drop in a &lt;video&gt; tag or an embedded player.</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <!-- ---- Project 2 ---- -->
+      <article class="project">
+        <aside class="titleblock">
+          <dl>
+            <div>
+              <dt>Discipline</dt>
+              <dd>Organic synthesis</dd>
+            </div>
+            <div>
+              <dt>Target</dt>
+              <dd>Acetaminophen (paracetamol), C₈H₉NO₂</dd>
+            </div>
+            <div>
+              <dt>Route</dt>
+              <dd>N-acetylation of 4-aminophenol</dd>
+            </div>
+            <div>
+              <dt>Purification</dt>
+              <dd>Recrystallization from hot water</dd>
+            </div>
+            <div>
+              <dt>Verification</dt>
+              <dd>Melting point + TLC vs. standard</dd>
+            </div>
+            <div>
+              <dt>Yield</dt>
+              <dd><span class="fill">add scale and % yield</span></dd>
+            </div>
+          </dl>
+        </aside>
+
+        <div class="project-body">
+          <h3><span class="rule" aria-hidden="true"></span>Acetaminophen Synthesis</h3>
+
+          <div class="prose">
+            <p>
+              A single-step acetylation carried out end to end: reaction, workup, purification, and
+              analytical confirmation that the white solid in the filter really is what the scheme
+              says it is.
+            </p>
+            <p>
+              <strong>Pathway.</strong> The aromatic amine of 4-aminophenol is the nucleophile; acetic
+              anhydride is the acylating agent. The amine attacks a carbonyl, the tetrahedral
+              intermediate collapses, and acetate leaves — giving the amide and acetic acid as the
+              by-product. The phenol is left untouched by keeping the conditions mild and aqueous, so
+              the reaction stays selective for the nitrogen rather than running on to the ester.
+            </p>
+          </div>
+
+          <h4>Reaction scheme</h4>
+          <div class="scheme">
+            <span class="reagent">4-aminophenol</span>
+            <span class="op">+</span>
+            <span class="reagent">(CH₃CO)₂O</span>
+            <span class="arrow">
+              <span>H₂O, warm</span>
+              <span class="glyph" aria-hidden="true">⟶</span>
+              <span>~20 min</span>
+            </span>
+            <span class="product">acetaminophen</span>
+            <span class="op">+</span>
+            <span class="reagent">CH₃COOH</span>
+          </div>
+
+          <div class="prose" style="margin-top:1.5rem">
+            <p>
+              <strong>Lab setup.</strong> Dissolution and reaction in a flask on a stirring hot plate
+              with a water bath for even heating, then vacuum filtration through a Büchner funnel,
+              a cold-water wash to carry off residual acid, and drying before any measurement is
+              taken.
+            </p>
+          </div>
+
+          <h4>Safety protocol</h4>
+          <ul class="checks">
+            <li>Acetic anhydride handled in the fume hood — corrosive, lachrymatory, reacts with water.</li>
+            <li>Goggles, nitrile gloves, and a lab coat throughout; gloves changed after any anhydride contact.</li>
+            <li>Water bath rather than an open flame; no ignition sources near the volatile workup.</li>
+            <li>Acidic filtrate neutralized before disposal; solid waste kept separate and labeled.</li>
+            <li>Product is a synthesis exercise and analytical exercise only — not of pharmaceutical grade, and not for consumption.</li>
+          </ul>
+
+          <h4>Purity verification</h4>
+          <ul class="checks">
+            <li><strong>Melting point.</strong> Literature value for pure acetaminophen is 169–171 °C. A sharp range at that value indicates clean product; a depressed, broadened range points to residual starting material or solvent, and calls for a second recrystallization.</li>
+            <li><strong>TLC.</strong> Product spotted alongside 4-aminophenol and a commercial standard. A single spot co-running with the standard, and the absence of the starting-material spot, confirms the conversion went through.</li>
+          </ul>
+
+          <h4>Documentation</h4>
+          <div class="frames">
+            <figure>
+              <div class="frame">
+                <span class="kind">Lab photo</span>
+                <span class="note">Reaction flask on the stir plate in the water bath</span>
+              </div>
+              <figcaption>IMAGE — the setup mid-reaction.</figcaption>
+            </figure>
+            <figure>
+              <div class="frame">
+                <span class="kind">Lab photo</span>
+                <span class="note">Vacuum filtration and the dried crystalline product</span>
+              </div>
+              <figcaption>IMAGE — Büchner funnel / product on the watch glass.</figcaption>
+            </figure>
+            <figure>
+              <div class="frame">
+                <span class="kind">Scan</span>
+                <span class="note">Developed TLC plate with Rf values marked</span>
+              </div>
+              <figcaption>IMAGE — plate photo or the drawn reaction scheme.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </article>
+
+      <!-- ---- Project 3 ---- -->
+      <article class="project">
+        <aside class="titleblock">
+          <dl>
+            <div>
+              <dt>Discipline</dt>
+              <dd>CAD / additive manufacturing</dd>
+            </div>
+            <div>
+              <dt>Modeled in</dt>
+              <dd><span class="fill">add CAD package</span></dd>
+            </div>
+            <div>
+              <dt>Process</dt>
+              <dd>FDM, 0.4 mm nozzle</dd>
+            </div>
+            <div>
+              <dt>Materials</dt>
+              <dd>PLA / PLA+ <span class="fill">confirm</span></dd>
+            </div>
+            <div>
+              <dt>Parts</dt>
+              <dd>Soprano ukulele · Mercedes-Benz star keychain</dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd><span class="fill">add current status</span></dd>
+            </div>
+          </dl>
+        </aside>
+
+        <div class="project-body">
+          <h3><span class="rule" aria-hidden="true"></span>3D Printing &amp; CAD Design</h3>
+
+          <div class="prose">
+            <p>
+              Parts drawn from scratch in CAD — no downloaded models — then sliced, printed, and
+              iterated until the physical part matches what the sketch promised. Most of the work
+              happens before the printer starts: deciding where a part splits, which surfaces have to
+              be dimensionally honest, and which way the layers should run for the load the part will
+              actually take.
+            </p>
+          </div>
+
+          <h4>Fully 3D-printed ukulele</h4>
+          <div class="prose">
+            <p>
+              A playable soprano ukulele modeled as an assembly rather than a single body. At a
+              ~350 mm scale length the instrument is far longer than any hobby build plate, so the
+              body and neck are split into printable sections joined on registered mating faces —
+              alignment pins and a glued lap joint at the heel — chosen so the seams fall where the
+              instrument is stiffest rather than across the soundboard.
+            </p>
+            <p>
+              <strong>Acoustic considerations drive the wall design.</strong> A solid printed shell
+              is too dead and too heavy, so the body is a thin-walled resonant box: the soundboard is
+              printed thin with internal ribbing to stay stiff under string tension without damping
+              the panel, the back and sides are thicker for a rigid enclosure, and infill is kept low
+              so the cavity stays a cavity. Layer orientation runs along the neck so the string load
+              pulls along the layers rather than trying to split them, and the neck carries a channel
+              for a stiffening rod. Bridge and nut are separate parts, printed dense, so the string
+              break angle can be tuned without reprinting the body.
+            </p>
+          </div>
+
+          <h4>Mercedes-Benz star keychain</h4>
+          <div class="prose">
+            <p>
+              A small, precise piece modeled as a design exercise in relief and tolerance: the
+              three-pointed star drawn as a sketch, revolved and extruded into a chamfered ring
+              relief, with a filleted lanyard hole sized to clear a split ring. Printed at a fine
+              layer height with the face flat on the bed so the top surface comes off the plate
+              clean, and finished as a two-color part by pausing the print for a filament swap at the
+              layer where the star meets the field. Personal, non-commercial print.
+            </p>
+          </div>
+
+          <h4>Documentation</h4>
+          <div class="frames">
+            <figure>
+              <div class="frame">
+                <span class="kind">CAD render</span>
+                <span class="note">Ukulele assembly — shaded view and exploded sections</span>
+              </div>
+              <figcaption>IMAGE — viewport render or a dimensioned drawing.</figcaption>
+            </figure>
+            <figure>
+              <div class="frame">
+                <span class="kind">Photo</span>
+                <span class="note">Printed ukulele assembled and strung</span>
+              </div>
+              <figcaption>IMAGE — the finished instrument.</figcaption>
+            </figure>
+            <figure>
+              <div class="frame">
+                <span class="kind">CAD render</span>
+                <span class="note">Keychain — top face and chamfer detail</span>
+              </div>
+              <figcaption>IMAGE — render of the keychain model.</figcaption>
+            </figure>
+            <figure>
+              <div class="frame">
+                <span class="kind">Photo</span>
+                <span class="note">Printed keychain in hand, showing surface finish</span>
+              </div>
+              <figcaption>IMAGE — the printed part.</figcaption>
+            </figure>
+          </div>
+          <figure style="margin-top:1rem">
+            <div class="frame wide">
+              <span class="kind">Video</span>
+              <span class="note">Optional: timelapse of the print, or the ukulele being played</span>
+            </div>
+            <figcaption>VIDEO — optional; delete this block if unused.</figcaption>
+          </figure>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Who's building this</p>
+          <h2>About &amp; contact</h2>
+        </div>
+      </div>
+
+      <div class="about">
+        <div>
+          <div class="prose">
+            <p>
+              I work across disciplines that usually sit in separate buildings. The same project
+              might start as a parametric sketch in CAD, become a printed or welded part, get its
+              behavior from a microcontroller reading analog sensors, and end with a bench
+              measurement to prove it does what the design said it would.
+            </p>
+            <p>
+              The wet-lab work runs on the same instinct: follow the mechanism, control the
+              conditions, then verify the result against a standard instead of assuming it. Whether
+              the output is a launcher, a crystalline solid, or an instrument that holds tune, the
+              habit is the same — design deliberately, build it yourself, and measure the outcome.
+            </p>
+          </div>
+
+          <dl class="skills">
+            <div>
+              <dt class="k">Design &amp; manufacturing</dt>
+              <dd class="v" style="margin:0">Parametric CAD, part splitting and tolerancing for assembly, FDM printing and slicer tuning, fabrication and finishing of metal and plastic parts.</dd>
+            </div>
+            <div>
+              <dt class="k">Electronics &amp; control</dt>
+              <dd class="v" style="margin:0">AVR / Arduino firmware, analog sensing and ADC calibration, servo and solenoid actuation, breadboard-to-panel wiring.</dd>
+            </div>
+            <div>
+              <dt class="k">Chemistry</dt>
+              <dd class="v" style="margin:0">Small-scale organic synthesis, recrystallization and vacuum filtration, TLC and melting-point analysis, lab safety and waste handling.</dd>
+            </div>
+            <div>
+              <dt class="k">Mechanical systems</dt>
+              <dd class="v" style="margin:0">Pneumatics and pressure handling, gimbals and linkages, structural layout for load paths.</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="contact">
+          <h3>Get in touch</h3>
+          <ul>
+            <li>
+              <a href="mailto:keanekim5@gmail.com">
+                <span>keanekim5@gmail.com</span>
+                <span class="k">Email</span>
+              </a>
+            </li>
+            <li>
+              <!-- TODO: replace with your GitHub URL -->
+              <a href="https://github.com/" target="_blank" rel="noopener">
+                <span>github.com/<span class="fill">username</span></span>
+                <span class="k">GitHub</span>
+              </a>
+            </li>
+            <li>
+              <!-- TODO: replace with your LinkedIn URL -->
+              <a href="https://www.linkedin.com/" target="_blank" rel="noopener">
+                <span>linkedin.com/in/<span class="fill">handle</span></span>
+                <span class="k">LinkedIn</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="colophon">
+  <div class="wrap">
+    <span>Keane Kim — built from scratch, documented in full</span>
+    <span>Last updated <span class="fill">month year</span></span>
+  </div>
+</footer>
+
+<script>
+  // Highlight the nav link for the section currently in view. No animation — just state.
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+    var sections = links
+      .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+      .filter(Boolean);
+    if (!('IntersectionObserver' in window) || !sections.length) return;
+
+    var visible = new Set();
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) visible.add(entry.target.id);
+        else visible.delete(entry.target.id);
+      });
+      var current = sections.filter(function (s) { return visible.has(s.id); })[0];
+      links.forEach(function (a) {
+        var on = current && a.getAttribute('href') === '#' + current.id;
+        if (on) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-25% 0px -60% 0px' });
+
+    sections.forEach(function (s) { observer.observe(s); });
+  })();
+</script>
+
+</body>
+</html>

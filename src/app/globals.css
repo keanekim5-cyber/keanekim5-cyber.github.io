@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+/*
+  Design tokens — "maker's bench at night" palette.
+  Near-black bases with a slight teal bias, one signal-teal accent
+  for interactive/live things, one signal-violet accent reserved for
+  chemistry/CAD highlights so the two disciplines read distinctly.
+*/
+:root {
+  --bg: #05070a;
+  --bg-elevated: #0a0e14;
+  --surface: #0e141b;
+  --surface-2: #131b24;
+  --border: #1e2933;
+  --border-strong: #2b3947;
+
+  --text: #e8eef2;
+  --text-muted: #93a4b0;
+  --text-faint: #5c6b76;
+
+  --accent: #35e6c2;       /* signal teal — circuits, control, primary CTA */
+  --accent-strong: #7dffe0;
+  --accent-soft: #0f2d29;
+  --accent-2: #b48cff;     /* signal violet — chemistry / CAD highlight */
+  --accent-2-soft: #201a35;
+
+  --font-display: var(--font-space-grotesk), "Segoe UI", system-ui, sans-serif;
+  --font-body: var(--font-inter), "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-2: var(--accent-2);
+  --color-accent-2-soft: var(--accent-2-soft);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+/* subtle circuit-board grid, fixed behind all content */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(53, 230, 194, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(53, 230, 194, 0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+}
+
+/* soft glow used behind hero copy and section headers */
+.glow {
+  background: radial-gradient(closest-side, rgba(53, 230, 194, 0.18), transparent 70%);
+  filter: blur(8px);
+}
+
+.prose-body p {
+  color: var(--color-text-muted);
+  margin-bottom: 1.1em;
+}
+.prose-body p:last-child {
+  margin-bottom: 0;
+}
+.prose-body strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+.prose-body a {
+  color: var(--color-accent);
+  text-underline-offset: 3px;
+}
+.prose-body a:hover {
+  color: var(--color-accent-strong);
+}
+
+/* custom scrollbar to match the dark theme */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 999px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 6rem;
+}
