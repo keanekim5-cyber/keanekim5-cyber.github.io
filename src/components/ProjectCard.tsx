@@ -13,7 +13,11 @@ export default function ProjectCard({ project }: { project: Project }) {
       className={`group flex flex-col gap-4 rounded-xl border border-border bg-surface p-5 transition-colors ${ring}`}
     >
       {project.coverImage ? (
-        <ProjectImage src={project.coverImage} alt={`${project.title} cover photo`} />
+        <ProjectImage
+          src={project.coverImage}
+          alt={`${project.title} cover photo`}
+          focus={project.coverImageFocus}
+        />
       ) : (
         <MediaPlaceholder kind="image" note={`${project.shortTitle} — cover image`} />
       )}

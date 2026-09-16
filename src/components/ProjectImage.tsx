@@ -5,11 +5,14 @@ export default function ProjectImage({
   alt,
   caption,
   wide = false,
+  focus = "center",
 }: {
   src: string;
   alt: string;
   caption?: string;
   wide?: boolean;
+  /** CSS object-position, for photos where a plain center-crop misses the subject. */
+  focus?: string;
 }) {
   return (
     <figure className="flex flex-col gap-2">
@@ -24,6 +27,7 @@ export default function ProjectImage({
           fill
           sizes="(min-width: 768px) 50vw, 100vw"
           className="object-cover"
+          style={{ objectPosition: focus }}
         />
       </div>
       {caption && (

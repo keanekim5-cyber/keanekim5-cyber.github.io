@@ -8,6 +8,7 @@ export type Project = {
   discipline: string;
   accent: "teal" | "violet";
   coverImage?: string;
+  coverImageFocus?: string;
   specs: { label: string; value: string }[];
 };
 
@@ -22,7 +23,8 @@ export const projects: Project[] = [
     tags: ["C++", "Arduino", "CAD", "Mechanical Design"],
     discipline: "Mechanical / Embedded",
     accent: "teal",
-    coverImage: "/images/potato-cannon/photo-1.jpg",
+    coverImage: "/images/potato-cannon/photo-4.png",
+    coverImageFocus: "center 70%",
     specs: [
       { label: "Frame", value: "Wooden supports, geared base" },
       { label: "Drive", value: "2 × servo, 10:1 gear reduction" },
