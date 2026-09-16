@@ -5,7 +5,7 @@ import ProjectFooterNav from "@/components/ProjectFooterNav";
 import SectionHeading from "@/components/SectionHeading";
 import ReactionScheme from "@/components/ReactionScheme";
 import Checklist from "@/components/Checklist";
-import MediaPlaceholder from "@/components/MediaPlaceholder";
+import ProjectImage from "@/components/ProjectImage";
 
 const project = getProject("acetaminophen-synthesis")!;
 const { prev, next } = getAdjacentProjects("acetaminophen-synthesis");
@@ -97,27 +97,19 @@ export default function AcetaminophenPage() {
         </div>
 
         <div className="mt-10">
-          <SectionHeading eyebrow="05 — Documentation" title="Lab photos & scheme" />
-          <div className="mt-6 grid gap-6 sm:grid-cols-2">
-            <MediaPlaceholder
-              kind="image"
-              note="Reaction flask on the stir plate in the water bath"
-              caption="Photo — the setup mid-reaction."
+          <SectionHeading eyebrow="05 — Documentation" title="Lab photos" />
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <ProjectImage
+              src="/images/acetaminophen-synthesis/photo-1.jpg"
+              alt="Working at the fume hood during the synthesis"
             />
-            <MediaPlaceholder
-              kind="image"
-              note="Vacuum filtration and the dried crystalline product"
-              caption="Photo — Büchner funnel / product on a watch glass."
+            <ProjectImage
+              src="/images/acetaminophen-synthesis/photo-2.jpg"
+              alt="Clamping a sample vial above the stirrer in the fume hood"
             />
-            <MediaPlaceholder
-              kind="scan"
-              note="Developed TLC plate with Rf values marked"
-              caption="Scan — plate photo or the drawn reaction scheme."
-            />
-            <MediaPlaceholder
-              kind="image"
-              note="Melting point apparatus reading at the transition"
-              caption="Photo — melting-point determination."
+            <ProjectImage
+              src="/images/acetaminophen-synthesis/photo-3.jpg"
+              alt="In the lab with a classmate during the synthesis"
             />
           </div>
         </div>

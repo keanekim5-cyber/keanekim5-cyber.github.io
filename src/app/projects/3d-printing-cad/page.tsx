@@ -3,7 +3,8 @@ import { getAdjacentProjects, getProject } from "@/lib/projects";
 import ProjectHeader from "@/components/ProjectHeader";
 import ProjectFooterNav from "@/components/ProjectFooterNav";
 import SectionHeading from "@/components/SectionHeading";
-import MediaPlaceholder from "@/components/MediaPlaceholder";
+import ProjectImage from "@/components/ProjectImage";
+import ProjectVideo from "@/components/ProjectVideo";
 
 const project = getProject("3d-printing-cad")!;
 const { prev, next } = getAdjacentProjects("3d-printing-cad");
@@ -82,36 +83,15 @@ export default function CadPrintingPage() {
         </div>
 
         <div className="mt-10">
-          <SectionHeading eyebrow="04 — Documentation" title="Renders & finished parts" />
-          <div className="mt-6 grid gap-6 sm:grid-cols-2">
-            <MediaPlaceholder
-              kind="render"
-              note="Ukulele assembly — shaded view and exploded sections"
-              caption="CAD render — viewport render or a dimensioned drawing."
-            />
-            <MediaPlaceholder
-              kind="image"
-              note="Printed ukulele, assembled and strung"
-              caption="Photo — the finished instrument."
-            />
-            <MediaPlaceholder
-              kind="render"
-              note="Keychain — top face and chamfer detail"
-              caption="CAD render — model render, front-on."
-            />
-            <MediaPlaceholder
-              kind="image"
-              note="Printed keychain in hand, showing surface finish"
-              caption="Photo — the printed part."
+          <SectionHeading eyebrow="04 — Documentation" title="Photos & video" />
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <ProjectImage
+              src="/images/3d-printing-cad/photo-1.jpg"
+              alt="3D-printed ukulele body fresh off the print bed"
             />
           </div>
           <div className="mt-6">
-            <MediaPlaceholder
-              kind="video"
-              note="Optional: print timelapse, or the ukulele being played"
-              caption="Video — optional; remove this block if unused."
-              wide
-            />
+            <ProjectVideo src="/videos/3d-printing-cad/video-1.mp4" />
           </div>
         </div>
       </article>

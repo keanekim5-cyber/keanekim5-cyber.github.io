@@ -4,7 +4,8 @@ import ProjectHeader from "@/components/ProjectHeader";
 import ProjectFooterNav from "@/components/ProjectFooterNav";
 import SectionHeading from "@/components/SectionHeading";
 import CodeBlock from "@/components/CodeBlock";
-import MediaPlaceholder from "@/components/MediaPlaceholder";
+import ProjectImage from "@/components/ProjectImage";
+import ProjectVideo from "@/components/ProjectVideo";
 
 const project = getProject("potato-cannon")!;
 const { prev, next } = getAdjacentProjects("potato-cannon");
@@ -131,26 +132,23 @@ export default function PotatoCannonPage() {
         </div>
 
         <div className="mt-10">
-          <SectionHeading eyebrow="04 — Documentation" title="Aiming & firing" />
-          <div className="mt-6 grid gap-6 sm:grid-cols-2">
-            <MediaPlaceholder
-              kind="image"
-              note="Full frame — wooden supports, base gear, and mounted launcher"
-              caption="Photo — the assembled positioning rig."
+          <SectionHeading eyebrow="04 — Documentation" title="Photos & video" />
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <ProjectImage
+              src="/images/potato-cannon/photo-1.jpg"
+              alt="CAD render of the base gear and drive pinion"
             />
-            <MediaPlaceholder
-              kind="render"
-              note="Onshape assembly — base gear, elevation gear, and mounts"
-              caption="CAD render — gear train and clamp detail."
+            <ProjectImage
+              src="/images/potato-cannon/photo-2.png"
+              alt="Onshape screenshot of the elevation gear design"
+            />
+            <ProjectImage
+              src="/images/potato-cannon/photo-3.png"
+              alt="Onshape screenshot of the center pillar part"
             />
           </div>
           <div className="mt-6">
-            <MediaPlaceholder
-              kind="video"
-              note="Demonstration: aiming sweep across both axes, then a test fire"
-              caption="Video — drop in a <video> tag or an embedded player."
-              wide
-            />
+            <ProjectVideo src="/videos/potato-cannon/video-1.mp4" />
           </div>
         </div>
       </article>
