@@ -7,6 +7,7 @@ export type Project = {
   tags: string[];
   discipline: string;
   accent: "teal" | "violet";
+  coverImage?: string;
   specs: { label: string; value: string }[];
 };
 
@@ -21,6 +22,7 @@ export const projects: Project[] = [
     tags: ["C++", "Arduino", "CAD", "Mechanical Design"],
     discipline: "Mechanical / Embedded",
     accent: "teal",
+    coverImage: "/images/potato-cannon/photo-1.jpg",
     specs: [
       { label: "Frame", value: "Wooden supports, geared base" },
       { label: "Drive", value: "2 × servo, 10:1 gear reduction" },
@@ -38,6 +40,7 @@ export const projects: Project[] = [
     tags: ["Organic Chemistry", "Wet Lab", "TLC", "Recrystallization"],
     discipline: "Organic Chemistry",
     accent: "violet",
+    coverImage: "/images/acetaminophen-synthesis/photo-2.jpg",
     specs: [
       { label: "Target", value: "Acetaminophen, C₈H₉NO₂" },
       { label: "Route", value: "N-acetylation of 4-aminophenol" },
@@ -55,6 +58,7 @@ export const projects: Project[] = [
     tags: ["CAD", "3D Printing", "FDM", "Product Design"],
     discipline: "CAD / Additive Manufacturing",
     accent: "violet",
+    coverImage: "/images/3d-printing-cad/photo-1.jpg",
     specs: [
       { label: "Modeled in", value: "Parametric CAD, sketch-driven" },
       { label: "Process", value: "FDM, 0.4mm nozzle" },

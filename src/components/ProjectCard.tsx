@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Project } from "@/lib/projects";
 import Tag from "@/components/Tag";
 import MediaPlaceholder from "@/components/MediaPlaceholder";
+import ProjectImage from "@/components/ProjectImage";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const ring = project.accent === "teal" ? "hover:border-accent/60" : "hover:border-accent-2/60";
@@ -11,7 +12,11 @@ export default function ProjectCard({ project }: { project: Project }) {
       href={`/projects/${project.slug}`}
       className={`group flex flex-col gap-4 rounded-xl border border-border bg-surface p-5 transition-colors ${ring}`}
     >
-      <MediaPlaceholder kind="image" note={`${project.shortTitle} — cover image`} />
+      {project.coverImage ? (
+        <ProjectImage src={project.coverImage} alt={`${project.title} cover photo`} />
+      ) : (
+        <MediaPlaceholder kind="image" note={`${project.shortTitle} — cover image`} />
+      )}
 
       <div className="flex flex-col gap-2">
         <p className="font-mono text-[11px] uppercase tracking-widest text-text-faint">

@@ -1,12 +1,6 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 
-const socials = [
-  { label: "GitHub", href: site.github.url, placeholder: site.github.placeholder },
-  { label: "LinkedIn", href: site.linkedin.url, placeholder: site.linkedin.placeholder },
-  { label: "Email", href: `mailto:${site.email}`, placeholder: false },
-];
-
 export default function Footer() {
   return (
     <footer className="border-t border-border bg-bg-elevated">
@@ -34,24 +28,14 @@ export default function Footer() {
 
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-text-faint">
-              Elsewhere
+              Contact
             </p>
             <ul className="mt-3 space-y-2 text-sm">
-              {socials.map((s) => (
-                <li key={s.label}>
-                  <a
-                    className="text-text-muted hover:text-accent"
-                    href={s.href}
-                    target={s.href.startsWith("http") ? "_blank" : undefined}
-                    rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  >
-                    {s.label}
-                    {s.placeholder && (
-                      <span className="ml-1 text-text-faint">(add link)</span>
-                    )}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a className="text-text-muted hover:text-accent" href={`mailto:${site.email}`}>
+                  Email
+                </a>
+              </li>
             </ul>
           </div>
         </div>

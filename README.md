@@ -42,14 +42,11 @@ src/
   lib/
     projects.ts                      Single source of truth for project
                                       cards + detail-page specs/tags
-    site.ts                          Email / GitHub / LinkedIn links
+    site.ts                          Contact email
 ```
 
 ## Before you deploy
 
-- **`src/lib/site.ts`** — swap the placeholder GitHub and LinkedIn URLs
-  for your real profiles (they're marked `placeholder: true` and render
-  with an "(add link)" hint until you do).
 - **Photos & videos** — see [Adding photos](#adding-photos) below.
 - **Project repo link** — the comment in
   `src/app/projects/potato-cannon/page.tsx` references
